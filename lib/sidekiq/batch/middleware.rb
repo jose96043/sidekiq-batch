@@ -21,6 +21,7 @@ module Sidekiq
               Thread.current[:batch] = nil
               Batch.process_successful_job(bid, msg['jid'])
             rescue
+              puts "jose process failed job"
               Batch.process_failed_job(bid, msg['jid'])
               raise
             ensure
