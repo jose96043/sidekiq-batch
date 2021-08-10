@@ -17,8 +17,10 @@ module Sidekiq
           puts "call server middleware"
           if (bid = msg['bid'])
             begin
+              puts "inside before new bid"
               Thread.current[:batch] = Sidekiq::Batch.new(bid)
               yield
+              puts "after yield"
               Thread.current[:batch] = nil
               Batch.process_successful_job(bid, msg['jid'])
             rescue
@@ -26,6 +28,7 @@ module Sidekiq
               Batch.process_failed_job(bid, msg['jid'])
               raise
             ensure
+              puts "ensure stuff"
               Thread.current[:batch] = nil
             end
           else
