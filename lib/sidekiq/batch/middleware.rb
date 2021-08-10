@@ -14,6 +14,10 @@ module Sidekiq
 
       class ServerMiddleware
         def call(_worker, msg, _queue)
+          puts 'worker'
+          puts _worker
+          puts msg
+          puts _queue
           puts "call server middleware"
           if (bid = msg['bid'])
             begin
