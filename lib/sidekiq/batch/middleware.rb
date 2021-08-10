@@ -14,6 +14,7 @@ module Sidekiq
 
       class ServerMiddleware
         def call(_worker, msg, _queue)
+          puts "call server middleware"
           if (bid = msg['bid'])
             begin
               Thread.current[:batch] = Sidekiq::Batch.new(bid)
