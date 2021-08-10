@@ -18,6 +18,8 @@ module Sidekiq
           puts _worker
           puts msg
           puts _queue
+          puts 'bid'
+          puts "#{bid}"
           puts "call server middleware"
           if (bid = msg['bid'])
             begin

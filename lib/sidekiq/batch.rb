@@ -147,6 +147,7 @@ module Sidekiq
 
     class << self
       def process_failed_job(bid, jid)
+        puts "process failed job here"
         _, pending, failed, children, complete, parent_bid = Sidekiq.redis do |r|
           r.multi do
             r.sadd("BID-#{bid}-failed", jid)
@@ -178,6 +179,7 @@ module Sidekiq
       end
 
       def process_successful_job(bid, jid)
+        puts "process failed job"
         failed, pending, children, complete, success, total, parent_bid = Sidekiq.redis do |r|
           r.multi do
             r.scard("BID-#{bid}-failed")
