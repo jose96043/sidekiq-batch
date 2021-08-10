@@ -19,9 +19,10 @@ module Sidekiq
           puts msg
           puts _queue
           puts 'bid'
-          puts "#{bid}"
+          puts msg['bid']
           puts "call server middleware"
-          if (bid = msg['bid'])
+          bid = msg['bid']
+          if bid
             begin
               puts "inside before new bid"
               Thread.current[:batch] = Sidekiq::Batch.new(bid)
